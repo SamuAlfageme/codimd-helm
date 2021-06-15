@@ -1,4 +1,4 @@
-{{ if .Values.codimd.imageStorePersistentVolume.enabled }}
+{{- if .Values.codimd.imageStorePersistentVolume.enabled }}
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -8,12 +8,12 @@ metadata:
   {{- include "codimd.labels" . | nindent 4}}
 spec:
   accessModes:
-    {{ range .Values.codimd.imageStorePersistentVolume.accessModes }}
+    {{- range .Values.codimd.imageStorePersistentVolume.accessModes }}
     - {{ . | quote }}
-    {{ end  }}
+    {{- end }}
   volumeMode: {{ .Values.codimd.imageStorePersistentVolume.volumeMode }}
   resources:
     requests:
       storage: {{ default "10G" .Values.codimd.imageStorePersistentVolume.size | quote }}
   {{- include "codimd.storageClass" . | nindent 2 }}
-  {{ end }}
+  {{- end }}
